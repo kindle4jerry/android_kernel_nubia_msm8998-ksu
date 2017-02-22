@@ -1287,6 +1287,7 @@ static int __set_cpus_allowed_ptr(struct task_struct *p,
 	cpumask_t allowed_mask;
 
 	rq = task_rq_lock(p, &flags);
+	update_rq_clock(rq);
 
 	/*
 	 * Must re-check here, to close a race against __kthread_bind(),
