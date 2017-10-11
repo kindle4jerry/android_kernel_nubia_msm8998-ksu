@@ -3190,7 +3190,7 @@ static void find_best_cpu_in_cluster(struct sched_cluster *c,
 
 	cpumask_and(&search_cpus, &env->search_cpus, &c->cpus);
 
-	env->need_idle = wake_to_idle(env->p) || c->wake_up_idle;
+	env->need_idle = wake_to_idle(env->p) || c->wake_up_idle || schedtune_prefer_idle(env->p);
 
 	for_each_cpu(i, &search_cpus) {
 		env->cpu_load = cpu_load_sync(i, env->sync);
