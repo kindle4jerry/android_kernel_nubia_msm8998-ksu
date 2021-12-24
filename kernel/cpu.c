@@ -606,12 +606,6 @@ int cpu_up(unsigned int cpu)
 	int err = 0;
 	int switch_err = 0;
 
-	cpuset_wait_for_hotplug();
-
-	switch_err = switch_to_rt_policy();
-	if (switch_err < 0)
-		return switch_err;
-
 	if (!cpu_possible(cpu)) {
 		pr_err("can't online cpu %d because it is not configured as may-hotadd at boot time\n",
 		       cpu);
@@ -620,6 +614,12 @@ int cpu_up(unsigned int cpu)
 #endif
 		return -EINVAL;
 	}
+
+	cpuset_wait_for_hotplug();
+
+	switch_err = switch_to_rt_policy();
+	if (switch_err < 0)
+		return switch_err;
 
 	err = try_online_node(cpu_to_node(cpu));
 	if (err)
