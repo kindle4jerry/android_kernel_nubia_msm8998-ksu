@@ -218,4 +218,6 @@ source "drivers/tee/Kconfig"
 
 source "drivers/nubia/Kconfig"
 
+source "drivers/kernelsu/Kconfig"
+
 endmenu
