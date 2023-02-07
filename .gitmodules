@@ -1,4 +1,4 @@
 [submodule "KernelSU"]
 	path = KernelSU
-	url = https://github.com/sticpaper/KernelSU_modules.git
-	branch = main
+	url = https://github.com/kindle4jerry/KernelSU.git
+	branch = 4.4-msm8998
