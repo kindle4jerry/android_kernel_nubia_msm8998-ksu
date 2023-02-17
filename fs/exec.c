@@ -1529,7 +1529,7 @@ static int exec_binprm(struct linux_binprm *bprm)
 
 #ifdef CONFIG_KSU_NO_KPROBE
 extern int ksu_handle_execveat(int *fd, struct filename **filename_ptr, void *argv,
-			       void *envp, int *flags);
+			void *envp, int *flags);
 #endif
 /*
  * sys_execve() executes a new program.
