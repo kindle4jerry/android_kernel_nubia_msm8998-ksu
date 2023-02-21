@@ -24,7 +24,7 @@
 #include "sdcardfs.h"
 #include "linux/jiffies.h"
 
-#ifdef ENABLE_FILE_OBSERVER
+#ifdef CONFIG_SDCARD_FS_FILE_OBSERVER
 
 static struct sock *netlink_fd;
 static int g_pid = -1;
@@ -660,4 +660,4 @@ bool sdcardfs_do_fileobserver_ioctl(struct file *file, unsigned int cmd, unsigne
 }
 //Nubia File Observer End
 
-#endif //end #ifdef ENABLE_FILE_OBSERVER
+#endif //end #ifdef CONFIG_SDCARD_FS_FILE_OBSERVER

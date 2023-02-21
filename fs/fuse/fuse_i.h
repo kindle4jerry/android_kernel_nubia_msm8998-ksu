@@ -112,7 +112,9 @@ struct fuse_inode {
 	unsigned long state;
 
        //Nubia FileObserver Begin
+#ifdef CONFIG_FUSE_FS_FILE_OBSERVER
         __u32 mask;
+#endif
         //Nubia FileObserver End
 };
 
@@ -130,10 +132,12 @@ struct fuse_conn;
 
 
 //Nubia FileObserver Begin
+#ifdef CONFIG_FUSE_FS_FILE_OBSERVER
 struct fuse_file_creator {
     uid_t uid;
     pid_t pid;
 };
+#endif
 //Nubia FileObserver End
 
 /** FUSE specific file data */
@@ -176,8 +180,10 @@ struct fuse_file {
 	bool passthrough_enabled;
 
         //Nubia FileObserver Begin
+#ifdef CONFIG_FUSE_FS_FILE_OBSERVER
         struct fuse_file_creator creator;
         __u32 mask;
+#endif
         //Nubia FileObserver End
 };
 

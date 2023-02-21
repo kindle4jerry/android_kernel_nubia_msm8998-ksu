@@ -21,7 +21,9 @@
 #include <linux/fs.h>
 
 //Nubia FileObserver Begin
+#ifdef CONFIG_FUSE_FS_FILE_OBSERVER
 #include "file_observer.h"
+#endif
 //Nubia FileObserver End
 
 static const struct file_operations fuse_direct_io_file_operations;
@@ -76,9 +78,11 @@ struct fuse_file *fuse_file_alloc(struct fuse_conn *fc)
 	}
 
         //Nubia FileObserver Begin
+#ifdef CONFIG_FUSE_FS_FILE_OBSERVER
         //ff->creator = NULL;
         memset(&ff->creator, 0, sizeof(struct fuse_file_creator));
         ff->mask = 0;
+#endif
         //Nubia FileObserver End
 
 	INIT_LIST_HEAD(&ff->write_entry);
@@ -332,7 +336,9 @@ static int fuse_release(struct inode *inode, struct file *file)
 
 	fuse_release_common(file, FUSE_RELEASE);
         //Nubia FileObserver Begin
+#ifdef CONFIG_FUSE_FS_FILE_OBSERVER
         fuse_post_file_release(inode, file);
+#endif
         //Nubia FileObserver End
 	/* return value is ignored by VFS */
 	return 0;
@@ -1336,7 +1342,9 @@ static ssize_t fuse_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
 	}
 
         //Nubia FileObserver Begin
+#ifdef CONFIG_FUSE_FS_FILE_OBSERVER
         fuse_post_file_write(file);
+#endif
         //Nubia FileObserver End
 out:
 	current->backing_dev_info = NULL;
@@ -2597,9 +2605,11 @@ long fuse_do_ioctl(struct file *file, unsigned int cmd, unsigned long arg,
 		inarg.flags |= FUSE_IOCTL_32BIT;
 #endif
 //Nubia FileObserver Begin
+#ifdef CONFIG_FUSE_FS_FILE_OBSERVER
         if(fuse_do_fileobserver_ioctl(file, cmd, arg, flags)) {
             return 0;
         }
+#endif
 //Nubia FileObserver End
 
 	/* assume all the iovs returned by client always fits in a page */

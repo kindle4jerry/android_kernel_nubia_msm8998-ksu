@@ -90,7 +90,7 @@
 
 
 //Nubia FileObserver Begin
-#ifdef ENABLE_FILE_OBSERVER
+#ifdef CONFIG_SDCARD_FS_FILE_OBSERVER
 struct sdcardfs_file_creator {
     uid_t uid;
     pid_t pid;
@@ -167,7 +167,7 @@ struct sdcardfs_file_info {
 	const struct vm_operations_struct *lower_vm_ops;
 
 //Nubia FileObserver Begin
-    #ifdef ENABLE_FILE_OBSERVER
+    #ifdef CONFIG_SDCARD_FS_FILE_OBSERVER
     struct sdcardfs_file_creator creator;
     __u32 mask;
     #endif
