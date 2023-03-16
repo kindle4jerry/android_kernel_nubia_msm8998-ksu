@@ -334,6 +334,7 @@ enum led_control_mode {
 	RGB_LED_MODE_POWER_ON,
 	RGB_LED_MODE_POWER_OFF,
 	RGB_LED_MODE_ONCE_BLINK,
+	RGB_LED_MODE_CUSTOM_BLINK,
 };
 
 enum fade_time_data{
@@ -3095,10 +3096,15 @@ static int  qpnp_led_mode_set(struct qpnp_led_data *led,struct qpnp_led_data *le
 		break;
 		case RGB_LED_MODE_AUTO_BLINK:
 			loop = true;
-			//led_param->fade_time= led->rgb_cfg->autoblink_fade_time;
-			//led_param->fullon_time= led->rgb_cfg->autoblink_fullon_time;
-			//led_param->fulloff_time = led->rgb_cfg->autoblink_fulloff_time;
+			led_param->fade_time= led->rgb_cfg->autoblink_fade_time;
+			led_param->fullon_time= led->rgb_cfg->autoblink_fullon_time;
+			led_param->fulloff_time = led->rgb_cfg->autoblink_fulloff_time;
 			led_param->max_grade = led->rgb_cfg->autoblink_max_grade;
+			qpnp_led_fill_parameter_breath_blink(led_param, pwm_cfg,loop);
+			led->cdev.brightness=led->cdev.max_brightness;
+		break;
+		case RGB_LED_MODE_CUSTOM_BLINK:
+			loop = true;
 			qpnp_led_fill_parameter_breath_blink(led_param, pwm_cfg,loop);
 			led->cdev.brightness=led->cdev.max_brightness;
 		break;
