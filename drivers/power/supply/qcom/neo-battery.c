@@ -82,7 +82,7 @@ struct neo_battery_data {
 };
 
 
-static int neo_battery_debug_mask = 0x01;
+static int neo_battery_debug_mask = 0x00;
 module_param_named(
 	debug_mask, neo_battery_debug_mask, int, S_IRUSR | S_IWUSR
 );
