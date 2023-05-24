@@ -11,3 +11,10 @@ config SDCARD_FS_FADV_NOACTIVE
 	default y
 	help
 	  Sdcardfs supports fadvise noactive mode.
+
+config SDCARD_FS_FILE_OBSERVER
+	tristate "Nubia file observer"
+	depends on SDCARD_FS
+	default n
+	help
+	  Nubia sdcard file observer

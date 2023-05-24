@@ -24,7 +24,7 @@
 #include <linux/parser.h>
 
 //Nubia FileObserver Begin
-#ifdef ENABLE_FILE_OBSERVER
+#ifdef CONFIG_SDCARD_FS_FILE_OBSERVER
 #include "observer.h"
 #endif
 //Nubia FileObserver End
@@ -486,7 +486,7 @@ static int __init init_sdcardfs_fs(void)
 	err = register_filesystem(&sdcardfs_fs_type);
 
 	//Nubia FileObserver Begin
-	#ifdef ENABLE_FILE_OBSERVER
+	#ifdef CONFIG_SDCARD_FS_FILE_OBSERVER
 	sdcardfs_init_file_observer();
 	#endif
 	//Nubia FileObserver End
@@ -502,7 +502,7 @@ out:
 static void __exit exit_sdcardfs_fs(void)
 {
     //Nubia FileObserver Begin
-	#ifdef ENABLE_FILE_OBSERVER
+	#ifdef CONFIG_SDCARD_FS_FILE_OBSERVER
 	sdcardfs_exit_file_observer();
 	#endif
 	//Nubia FileObserver End

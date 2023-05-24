@@ -245,6 +245,7 @@ struct isp_cmd_sensor_info {
 	bool on; /* On/off flag*/
 	u8 sensor_mode; /* Sensor mode*/
 };
+#pragma pack()
 
 /**
  *@struct RECORDER_TXINFO
@@ -254,6 +255,7 @@ struct isp_cmd_sensor_info {
 struct isp_cmd_tx_info {
 	bool on; /* On/off flag*/
 };
+#pragma pack()
 
 /* ISP operation mode*/
 enum ispctrl_operation_mode {
@@ -288,7 +290,7 @@ struct isp_cmd_system_info {
 	u16 cis2_sensor_id; /*CIS-2 sensor ID*/
 	u8 current_isp_mode; /* current ISP mode*/
 };
-
+#pragma pack()
 
 
 /**
@@ -316,6 +318,7 @@ struct isp_cmd_depth_3a_info {
 	u16 sub_cam_vcm_position;
 	u8  sub_cam_vcm_status;
 };
+#pragma pack()
 
 /**
  *@struct isp_cmd_basic_para
@@ -354,6 +357,7 @@ struct isp_cmd_basic_para {
 	u8  histogram_mode;
 	u8  shutter_key_mode;
 };
+#pragma pack()
 
 /**
  *@struct isp_cmd_ae_zone_info
@@ -367,6 +371,7 @@ struct isp_cmd_ae_zone_info {
 	u16 ae_zone_height;
 	u16 ae_weight_factor;
 };
+#pragma pack()
 
 /**
  *@struct isp_cmd_af_zone_info
@@ -380,6 +385,7 @@ struct isp_cmd_af_zone_info {
 	u16 af_zone_height;
 	u16 af_weight_factor;
 };
+#pragma pack()
 
 
 #pragma pack(1)
@@ -389,6 +395,7 @@ struct memmory_dump_hdr_info {
 	u32 block_size;
 	u32 dump_mode;
 };
+#pragma pack()
 
 
 /**
@@ -400,6 +407,7 @@ struct common_log_hdr_info {
 	u32 total_size;
 	u32 block_size;
 };
+#pragma pack()
 
 
 

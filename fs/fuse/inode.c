@@ -22,7 +22,9 @@
 #include <linux/exportfs.h>
 
 //Nubia FileObserver Begin
+#ifdef CONFIG_FUSE_FS_FILE_OBSERVER
 #include "file_observer.h"
+#endif
 //Nubia FileObserver End
 
 MODULE_AUTHOR("Miklos Szeredi <miklos@szeredi.hu>");
@@ -1363,7 +1365,9 @@ static int __init fuse_init(void)
 	sanitize_global_limit(&max_user_congthresh);
 
         //Nubia FileObserver Begin
+#ifdef CONFIG_FUSE_FS_FILE_OBSERVER
         fuse_init_file_observer();
+#endif
         //Nubia FileObserver End
 
 	return 0;
@@ -1383,7 +1387,9 @@ static void __exit fuse_exit(void)
 	printk(KERN_DEBUG "fuse exit\n");
 
         //Nubia FileObserver Begin
+#ifdef CONFIG_FUSE_FS_FILE_OBSERVER
         fuse_exit_file_observer();
+#endif
         //Nubia FileObserver End
 
 	fuse_ctl_cleanup();

@@ -612,7 +612,7 @@ static ssize_t tmd2725_lux_table_store(struct device *dev,
 	int64_t d_factor, ch0_coef1, ch1_coef1, ch0_coef2, ch1_coef2;
 
 	if (5 != sscanf(buf, "%10lld,%10lld,%10lld,%10lld,%10lld", &d_factor,
-			&ch0_coef1, &ch1_coef1, &ch0_coef2, &ch1_coef2));
+			&ch0_coef1, &ch1_coef1, &ch0_coef2, &ch1_coef2))
 		return -EINVAL;
 
 	AMS_MUTEX_LOCK(&chip->als_lock);

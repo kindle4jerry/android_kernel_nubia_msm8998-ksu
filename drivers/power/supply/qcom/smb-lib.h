@@ -75,6 +75,7 @@ enum print_reason {
 #endif
 #define WBC_VOTER			"WBC_VOTER"
 #define OV_VOTER			"OV_VOTER"
+#define FG_ESR_VOTER			"FG_ESR_VOTER"
 #define FCC_STEPPER_VOTER		"FCC_STEPPER_VOTER"
 
 #define VCONN_MAX_ATTEMPTS	3

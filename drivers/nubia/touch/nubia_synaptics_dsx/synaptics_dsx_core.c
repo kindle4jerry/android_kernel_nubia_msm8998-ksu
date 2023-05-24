@@ -756,7 +756,7 @@ static ssize_t synaptics_rmi4_hw_sw_reset_show(struct device *dev,
 		return retval;
 	}
 
-	return snprintf(buf, PAGE_SIZE, "%u\n", retval);
+	return snprintf(buf, sizeof(buf), "%u\n", retval);
 }
 
 static ssize_t synaptics_rmi4_f01_reset_store(struct device *dev,
@@ -788,7 +788,7 @@ static ssize_t synaptics_rmi4_f01_productinfo_show(struct device *dev,
 {
 	struct synaptics_rmi4_data *rmi4_data = dev_get_drvdata(dev);
 
-	return snprintf(buf, PAGE_SIZE, "0x%02x 0x%02x\n",
+	return snprintf(buf, sizeof(buf), "0x%02x 0x%02x\n",
 			(rmi4_data->rmi4_mod_info.product_info[0]),
 			(rmi4_data->rmi4_mod_info.product_info[1]));
 }
@@ -798,7 +798,7 @@ static ssize_t synaptics_rmi4_f01_buildid_show(struct device *dev,
 {
 	struct synaptics_rmi4_data *rmi4_data = dev_get_drvdata(dev);
 
-	return snprintf(buf, PAGE_SIZE, "%u\n",
+	return snprintf(buf, sizeof(buf), "%u\n",
 			rmi4_data->firmware_id);
 }
 
@@ -820,7 +820,7 @@ static ssize_t synaptics_rmi4_f01_flashprog_show(struct device *dev,
 		return retval;
 	}
 
-	return snprintf(buf, PAGE_SIZE, "%u\n",
+	return snprintf(buf, sizeof(buf), "%u\n",
 			device_status.flash_prog);
 }
 
@@ -829,7 +829,7 @@ static ssize_t synaptics_rmi4_0dbutton_show(struct device *dev,
 {
 	struct synaptics_rmi4_data *rmi4_data = dev_get_drvdata(dev);
 
-	return snprintf(buf, PAGE_SIZE, "%u\n",
+	return snprintf(buf, sizeof(buf), "%u\n",
 			rmi4_data->button_0d_enabled);
 }
 
@@ -851,7 +851,7 @@ static ssize_t synaptics_rmi4_home_show(struct device *dev,
 		return retval;
 	}
 
-	return snprintf(buf, PAGE_SIZE, "%u\n", data);
+	return snprintf(buf, sizeof(buf), "%u\n", data);
 
 }
 
@@ -905,7 +905,7 @@ static ssize_t synaptics_rmi4_menu_show(struct device *dev,
 		return retval;
 	}
 
-	return snprintf(buf, PAGE_SIZE, "%u\n", data);
+	return snprintf(buf, sizeof(buf), "%u\n", data);
 
 }
 
@@ -957,7 +957,7 @@ static ssize_t synaptics_rmi4_back_show(struct device *dev,
 		return retval;
 	}
 
-	return snprintf(buf, PAGE_SIZE, "%u\n", data);
+	return snprintf(buf, sizeof(buf), "%u\n", data);
 
 }
 
@@ -1056,7 +1056,7 @@ static ssize_t synaptics_rmi4_reversed_keys_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
 	struct synaptics_rmi4_data *rmi4_data = dev_get_drvdata(dev);
-	return snprintf(buf, PAGE_SIZE, "%u\n",
+	return snprintf(buf, sizeof(buf), "%u\n",
 			rmi4_data->enable_reversed_keys);
 }
 static ssize_t synaptics_rmi4_reversed_keys_store(struct device *dev,
@@ -1097,7 +1097,7 @@ static ssize_t synaptics_rmi4_wake_gesture_show(struct device *dev,
 {
 	struct synaptics_rmi4_data *rmi4_data = dev_get_drvdata(dev);
 
-	return snprintf(buf, PAGE_SIZE, "%u\n",
+	return snprintf(buf, sizeof(buf), "%u\n",
 			rmi4_data->enable_wakeup_gesture);
 }
 
@@ -1134,13 +1134,13 @@ static ssize_t synaptics_rmi4_palm_sleep_show(struct device *dev,
 	struct synaptics_rmi4_data *rmi4_data = nubia_tp;
 	if (NULL == rmi4_data) {
 		pr_err("%s:rmi4_data is NULL\n", __func__);
-		return snprintf(buf, PAGE_SIZE, "NULL\n");
+		return snprintf(buf, sizeof(buf), "NULL\n");
 	}
 #else
 	struct synaptics_rmi4_data *rmi4_data = dev_get_drvdata(dev);
 #endif
 
-	return snprintf(buf, PAGE_SIZE, "%u\n",
+	return snprintf(buf, sizeof(buf), "%u\n",
 			rmi4_data->palm_sleep);
 }
 
@@ -1180,7 +1180,7 @@ static ssize_t nubia_wake_gesture_show(struct device *dev,
 
 	if (!rmi4_data)
 		return -EPERM;
-	return snprintf(buf, PAGE_SIZE, "%u\n",
+	return snprintf(buf, sizeof(buf), "%u\n",
 			rmi4_data->enable_wakeup_gesture);
 }
 
@@ -3563,7 +3563,7 @@ static int synaptics_rmi4_gpio_setup(int gpio, bool config, int dir, int state)
 	unsigned char buf[16];
 
 	if (config) {
-		snprintf(buf, PAGE_SIZE, "dsx_gpio_%u\n", gpio);
+		snprintf(buf, sizeof(buf), "dsx_gpio_%u\n", gpio);
 
 		if (gpio_is_valid(gpio)) {
 		retval = gpio_request(gpio, buf);

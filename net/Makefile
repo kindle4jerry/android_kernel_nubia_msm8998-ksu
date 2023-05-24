@@ -79,4 +79,3 @@ obj-y				+= l3mdev/
 endif
 obj-$(CONFIG_IPC_ROUTER)	+= ipc_router/
 obj-$(CONFIG_RMNET_DATA) += rmnet_data/
-obj-y	+= cta_uid_hook/
