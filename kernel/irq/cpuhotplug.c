@@ -36,6 +36,10 @@ static bool migrate_one_irq(struct irq_desc *desc)
 	affinity = &available_cpus;
 
 	if (cpumask_any_and(affinity, cpu_online_mask) >= nr_cpu_ids) {
+		const struct cpumask *default_affinity;
+
+		default_affinity = desc->affinity_hint ? : irq_default_affinity;
+
 		/*
 		 * The order of preference for selecting a fallback CPU is
 		 *
@@ -45,9 +49,9 @@ static bool migrate_one_irq(struct irq_desc *desc)
 		 */
 		cpumask_andnot(&available_cpus, cpu_online_mask,
 							cpu_isolated_mask);
-		if (cpumask_intersects(&available_cpus, irq_default_affinity))
+		if (cpumask_intersects(&available_cpus, default_affinity))
 			cpumask_and(&available_cpus, &available_cpus,
-							irq_default_affinity);
+							default_affinity);
 		else if (cpumask_empty(&available_cpus))
 			affinity = cpu_online_mask;
 
@@ -108,7 +112,7 @@ void irq_migrate_all_off_this_cpu(void)
 		raw_spin_unlock(&desc->lock);
 
 		if (affinity_broken)
-			pr_warn_ratelimited("IRQ%u no longer affine to CPU%u\n",
+			pr_debug_ratelimited("IRQ%u no longer affine to CPU%u\n",
 					    irq, smp_processor_id());
 	}
 
